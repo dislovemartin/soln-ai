@@ -1,0 +1,16 @@
+
+version: '3'
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile_fastapi
+    ports:
+      - "8000:8000"
+
+  training:
+    build:
+      context: .
+      dockerfile: Dockerfile_training
+    environment:
+      - "GPU_ENABLED=true"

@@ -1,0 +1,9 @@
+cryptography
+fastapi
+grpcio
+kafka-python
+optuna
+prometheus-client
+pydantic
+scikit-learn
+uvicorn

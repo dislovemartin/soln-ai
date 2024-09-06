@@ -1,0 +1,15 @@
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: model-retraining-cronjob
+spec:
+  schedule: "0 0 * * 7"  # Weekly retraining every Sunday at midnight
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: retraining
+            image: retraining-image
+          restartPolicy: OnFailure

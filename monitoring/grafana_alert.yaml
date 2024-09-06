@@ -1,0 +1,17 @@
+
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: api-rate-limit-alert
+spec:
+  groups:
+  - name: API Alert Rules
+    rules:
+    - alert: HighRequestRate
+      expr: sum(rate(request_count[1m])) > 100  # Threshold of 100 requests per minute
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "High API Request Rate"
+        description: "The API request rate exceeded 100 requests per minute for the last 5 minutes."

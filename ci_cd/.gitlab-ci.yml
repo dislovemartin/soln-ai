@@ -1,0 +1,24 @@
+
+stages:
+  - build
+  - deploy
+
+# Build stage for FastAPI and training images
+build:
+  stage: build
+  script:
+    # Log in to DockerHub (or another registry)
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    # Build and push FastAPI image
+    - docker build -t my-fastapi-image:latest .
+    - docker push my-fastapi-image:latest
+    # Build and push training image
+    - docker build -t my-training-image:latest ./training
+    - docker push my-training-image:latest
+
+# Deployment stage to deploy the Helm chart
+deploy:
+  stage: deploy
+  script:
+    # Install or upgrade the Helm chart for Kubernetes deployment
+    - helm upgrade --install automl-deployment ./my-automl-chart

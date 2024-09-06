@@ -1,0 +1,13 @@
+
+pipeline {
+    agent any
+    stages {
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'helm upgrade --install automl-model ./deployment/helm-chart --namespace default'
+                }
+            }
+        }
+    }
+}

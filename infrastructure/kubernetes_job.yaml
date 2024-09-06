@@ -1,0 +1,17 @@
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: distributed-training-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: training
+        image: my-training-image
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "1"
+      restartPolicy: Never
+  backoffLimit: 4
